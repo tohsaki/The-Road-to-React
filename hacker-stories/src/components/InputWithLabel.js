@@ -1,9 +1,9 @@
 import React from "react";
 
-function InputWithLabel({ id, label, value, type = "text", onInputChange }) {
+function InputWithLabel({ id, value, type = "text", onInputChange, children }) {
   return (
     <div>
-      <label htmlFor={id}>{label}</label>
+      <label htmlFor={id}>{children}</label>
       &nbsp;
       <input id={id} type={type} value={value} onChange={onInputChange} />
     </div>

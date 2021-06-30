@@ -13,10 +13,9 @@ export default function Search({ search: searchTerm, onSearch }) {
       {console.log("Search.rerurn()")}
       <InputWithLabel
         id="search"
-        label="Search:"
         value={searchTerm}
         onInputChange={handleChange}
-      />
+      >Search:</InputWithLabel>
       <p>
         Searching for <strong>{searchTerm}</strong>
       </p>
