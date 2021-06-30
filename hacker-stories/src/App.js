@@ -4,7 +4,7 @@ import SumAge from "./components/SumAge";
 import List from "./components/List";
 import JSClass from "./components/JSClass";
 import Search from "./components/Search";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const welcome = {
   greeting: "Hey",
@@ -47,6 +47,14 @@ const stories_2 = [
   },
 ];
 
+const useSemiPersistentState = (key, initialState) => {
+  const [value, setValue] = useState(localStorage.getItem(key) || initialState);
+  useEffect(() => {
+    localStorage.setItem(key, value);
+  }, [value, key]);
+  return [value, setValue];
+};
+
 function App() {
   const stories_1 = [
     {
@@ -67,21 +75,20 @@ function App() {
     },
   ];
 
-
-
-  const [searchTerm, setSearchTerm] = useState("")
+  const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
   const handleSearch = (event) => {
-    console.log(`App.handleSearch: ${event.target.value}`)
-    setSearchTerm(event.target.value)
-    setTimeout(() => {console.log(`searchTerm in App.js: ${searchTerm}`)}, 1000)
-    
-  }
+    console.log(`App.handleSearch: ${event.target.value}`);
+    setSearchTerm(event.target.value);
+    setTimeout(() => {
+      console.log(`searchTerm in App.js: ${searchTerm}`);
+    }, 1000);
+  };
 
-  const searchStories =  stories_1.filter((story) => {
-    console.log(`searchTerm in App.js/stories_1.filter: ${searchTerm}`)
-    return story.title.toLowerCase().includes(searchTerm.toLowerCase())
-  })
+  const searchStories = stories_1.filter((story) => {
+    console.log(`searchTerm in App.js/stories_1.filter: ${searchTerm}`);
+    return story.title.toLowerCase().includes(searchTerm.toLowerCase());
+  });
 
   return (
     <div className="App">
@@ -92,7 +99,7 @@ function App() {
       </h2>
       <h2>{getTitle("React")}</h2>
       <h3>{getName(me)}</h3>
-      <Search onSearch={handleSearch}/>
+      <Search search={searchTerm} onSearch={handleSearch} />
       <br />
       <br />
       <ul>
