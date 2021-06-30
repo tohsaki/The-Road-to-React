@@ -4,7 +4,8 @@ import SumAge from "./components/SumAge";
 import List from "./components/List";
 import JSClass from "./components/JSClass";
 import Search from "./components/Search";
-import { useState, useEffect } from "react";
+// import { useState, useEffect } from "react";
+import useSemiPersistentState from "./components/useSemiPersistentState";
 
 const welcome = {
   greeting: "Hey",
@@ -46,14 +47,6 @@ const stories_2 = [
     objectID: 1,
   },
 ];
-
-const useSemiPersistentState = (key, initialState) => {
-  const [value, setValue] = useState(localStorage.getItem(key) || initialState);
-  useEffect(() => {
-    localStorage.setItem(key, value);
-  }, [value, key]);
-  return [value, setValue];
-};
 
 function App() {
   const stories_1 = [
