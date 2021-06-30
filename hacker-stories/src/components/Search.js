@@ -1,6 +1,7 @@
 import React from "react";
+import InputWithLabel from "./InputWithLabel";
 
-export default function Search({ search, onSearch }) {
+export default function Search({ search: searchTerm, onSearch }) {
   const handleChange = (event) => {
     console.log(event.target.value);
 
@@ -10,10 +11,14 @@ export default function Search({ search, onSearch }) {
   return (
     <div>
       {console.log("Search.rerurn()")}
-      <label htmlFor="search">Search: </label>
-      <input id="search" type="text" onChange={handleChange} value={search} />
+      <InputWithLabel
+        id="search"
+        label="Search:"
+        value={searchTerm}
+        onInputChange={handleChange}
+      />
       <p>
-        Searching for <strong>{search}</strong>
+        Searching for <strong>{searchTerm}</strong>
       </p>
     </div>
   );
