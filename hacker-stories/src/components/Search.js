@@ -14,8 +14,11 @@ export default function Search({ search: searchTerm, onSearch }) {
       <InputWithLabel
         id="search"
         value={searchTerm}
+        isFocused
         onInputChange={handleChange}
-      >Search:</InputWithLabel>
+      >
+        Search:
+      </InputWithLabel>
       <p>
         Searching for <strong>{searchTerm}</strong>
       </p>
