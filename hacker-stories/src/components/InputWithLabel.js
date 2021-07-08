@@ -11,8 +11,8 @@ function InputWithLabel({
   const inputRef = useRef();
 
   useEffect(() => {
-      console.log(`isFocused: ${isFocused}`)
-      console.log(`inputRef.current: ${inputRef.current}`)
+    console.log(`isFocused: ${isFocused}`);
+    console.log(`inputRef.current: ${inputRef.current}`);
     if (isFocused && inputRef.current) {
       inputRef.current.focus();
     }

@@ -6,6 +6,7 @@ import JSClass from "./components/JSClass";
 import Search from "./components/Search";
 // import { useState, useEffect } from "react";
 import useSemiPersistentState from "./components/useSemiPersistentState";
+import { useState } from "react";
 
 const welcome = {
   greeting: "Hey",
@@ -36,7 +37,7 @@ const stories_2 = [
     author: "Jordan Walke_2",
     num_comments: 2,
     points: 2,
-    objectID: 0,
+    objectID: 2,
   },
   {
     title: "Redux_2",
@@ -44,12 +45,12 @@ const stories_2 = [
     author: "Dan Abramov, Andrew Clark_2",
     num_comments: 2,
     points: 2,
-    objectID: 1,
+    objectID: 3,
   },
 ];
 
 function App() {
-  const stories_1 = [
+  const initialStories = [
     {
       title: "React",
       url: "https://reactjs.org/",
@@ -70,6 +71,8 @@ function App() {
 
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
 
+  const [stories, setStories] = useState(initialStories);
+
   const handleSearch = (event) => {
     console.log(`App.handleSearch: ${event.target.value}`);
     setSearchTerm(event.target.value);
@@ -78,10 +81,17 @@ function App() {
     }, 1000);
   };
 
-  const searchStories = stories_1.filter((story) => {
+  const searchStories = stories.filter((story) => {
     console.log(`searchTerm in App.js/stories_1.filter: ${searchTerm}`);
     return story.title.toLowerCase().includes(searchTerm.toLowerCase());
   });
+
+  const handleRemoveStory = (item) => {
+    const newStories = stories.filter(
+      (story) => item.objectID !== story.objectID
+    );
+    setStories(newStories);
+  };
 
   return (
     <div className="App">
@@ -96,12 +106,9 @@ function App() {
       <br />
       <br />
       <ul>
-        <List list={searchStories} />
+        <List list={searchStories} onRemoveItem={handleRemoveStory}/>
       </ul>
-      <hr />
-      <ul>
-        <List list={stories_2} />
-      </ul>
+ 
 
       <JSClass />
     </div>

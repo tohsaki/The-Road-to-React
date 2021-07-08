@@ -1,25 +1,14 @@
 import React from "react";
+import Item from "./Item";
 
-function Titles({ list }) {
-  const Item = ({ item }) => {
-    return (
-      <li>
-        <span>
-          <a href={item.url}>{item.title}</a>
-        </span>
-        <span> {item.author}</span>
-        <span> {item.num_comments} comment(s)</span>
-        <span> {item.points} point(s)</span>
-      </li>
-    );
-  };
+function Titles({ list, onRemoveItem }) {
 
   return (
     <div>
       {console.log("List.rerurn()")}
 
       {list.map((item) => (
-        <Item key={item.objectID} item={item} />
+        <Item key={item.objectID} item={item} onRemoveItem={onRemoveItem}/>
       ))}
     </div>
   );
