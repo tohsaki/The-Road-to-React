@@ -6,7 +6,7 @@ import JSClass from "./components/JSClass";
 import Search from "./components/Search";
 // import { useState, useEffect } from "react";
 import useSemiPersistentState from "./components/useSemiPersistentState";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const welcome = {
   greeting: "Hey",
@@ -69,9 +69,24 @@ function App() {
     },
   ];
 
-  const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "React");
+  const getAsyncStories = () =>
+    new Promise(
+      (resolve) =>
+        setTimeout(() => resolve({ data: { stories: initialStories } })),
+      5000
+    );
 
-  const [stories, setStories] = useState(initialStories);
+  const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "");
+
+  const [stories, setStories] = useState([]);
+
+  useEffect(() => {
+    getAsyncStories().then((result) => {
+      setStories(result.data.stories);
+    });
+  }, []);
+
+  
 
   const handleSearch = (event) => {
     console.log(`App.handleSearch: ${event.target.value}`);
@@ -106,9 +121,8 @@ function App() {
       <br />
       <br />
       <ul>
-        <List list={searchStories} onRemoveItem={handleRemoveStory}/>
+        <List list={searchStories} onRemoveItem={handleRemoveStory} />
       </ul>
- 
 
       <JSClass />
     </div>
