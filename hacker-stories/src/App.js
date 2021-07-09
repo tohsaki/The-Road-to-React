@@ -79,14 +79,19 @@ function App() {
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "");
 
   const [stories, setStories] = useState([]);
+  const [isLoding, setIsLoading] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   useEffect(() => {
-    getAsyncStories().then((result) => {
-      setStories(result.data.stories);
-    });
+    setIsLoading(true);
+    console.log("setIsLoading to true...");
+    getAsyncStories()
+      .then((result) => {
+        setStories(result.data.stories);
+      })
+      .catch(() => setIsError(true));
+    setIsLoading(false);
   }, []);
-
-  
 
   const handleSearch = (event) => {
     console.log(`App.handleSearch: ${event.target.value}`);
@@ -120,8 +125,13 @@ function App() {
       <Search search={searchTerm} onSearch={handleSearch} />
       <br />
       <br />
+      {isError && <p>Something went wrong!</p>}
       <ul>
-        <List list={searchStories} onRemoveItem={handleRemoveStory} />
+        {isLoding ? (
+          <p>Loading...{console.log("Loading...")}</p>
+        ) : (
+          <List list={searchStories} onRemoveItem={handleRemoveStory} />
+        )}
       </ul>
 
       <JSClass />
