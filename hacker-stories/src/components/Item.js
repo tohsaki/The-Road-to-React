@@ -1,10 +1,6 @@
 import React from "react";
 
 function Item({ item, onRemoveItem }) {
-  // const handleRemoveItem = () => {
-  //   onRemoveItem(item);
-  // };
-
   return (
     <li>
       <span>
