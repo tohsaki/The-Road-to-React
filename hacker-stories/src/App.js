@@ -7,6 +7,7 @@ import Search from "./components/Search";
 // import { useState, useEffect } from "react";
 import useSemiPersistentState from "./components/useSemiPersistentState";
 import { useEffect, useState, useReducer } from "react";
+import { renderIntoDocument } from "react-dom/cjs/react-dom-test-utils.production.min";
 
 const welcome = {
   greeting: "Hey",
@@ -85,10 +86,12 @@ function App() {
   });
 
   useEffect(() => {
+if(!searchTerm) return;
+
     dispatchStories({ type: "STORIES_FETCH_INIT" });
 
     console.log("setIsLoading to true...");
-    fetch(`${API_ENDOPINT}react`)
+    fetch(`${API_ENDOPINT}${searchTerm}`)
       .then((response) => response.json())
       .then((result) => {
         dispatchStories({
@@ -97,7 +100,7 @@ function App() {
         });
       })
       .catch(() => dispatchStories({ type: "STORIES_FETCH_FAILURE" }));
-  }, []);
+  }, [searchTerm]);
 
   const handleSearch = (event) => {
     console.log(`App.handleSearch: ${event.target.value}`);
@@ -106,11 +109,6 @@ function App() {
       console.log(`searchTerm in App.js: ${searchTerm}`);
     }, 1000);
   };
-
-  const searchStories = stories.data.filter((story) => {
-    console.log(`searchTerm in App.js/stories_1.filter: ${searchTerm}`);
-    return story.title.toLowerCase().includes(searchTerm.toLowerCase());
-  });
 
   const handleRemoveStory = (item) => {
     dispatchStories({ type: "REMOVE_STORIES", payload: item });
@@ -135,7 +133,7 @@ function App() {
             Loading...{console.log("Loading...")}
           </p>
         ) : (
-          <List list={searchStories} onRemoveItem={handleRemoveStory} />
+          <List list={stories.data} onRemoveItem={handleRemoveStory} />
         )}
       </ul>
 
