@@ -86,7 +86,7 @@ function App() {
   });
 
   useEffect(() => {
-if(!searchTerm) return;
+    if (!searchTerm) return;
 
     dispatchStories({ type: "STORIES_FETCH_INIT" });
 
@@ -129,9 +129,7 @@ if(!searchTerm) return;
       {stories.isError && <p>Something went wrong!</p>}
       <ul>
         {stories.isLoding ? (
-          <p>
-            Loading...{console.log("Loading...")}
-          </p>
+          <p>Loading...{console.log("Loading...")}</p>
         ) : (
           <List list={stories.data} onRemoveItem={handleRemoveStory} />
         )}
