@@ -6,7 +6,7 @@ import JSClass from "./components/JSClass";
 import Search from "./components/Search";
 // import { useState, useEffect } from "react";
 import useSemiPersistentState from "./components/useSemiPersistentState";
-import { useEffect, useState, useReducer } from "react";
+import { useEffect, useCallback, useReducer } from "react";
 import { renderIntoDocument } from "react-dom/cjs/react-dom-test-utils.production.min";
 
 const welcome = {
@@ -85,7 +85,7 @@ function App() {
     isError: false,
   });
 
-  useEffect(() => {
+  const handleStories = useCallback(() => {
     if (!searchTerm) return;
 
     dispatchStories({ type: "STORIES_FETCH_INIT" });
@@ -101,6 +101,11 @@ function App() {
       })
       .catch(() => dispatchStories({ type: "STORIES_FETCH_FAILURE" }));
   }, [searchTerm]);
+
+  useEffect(() => {
+    console.log("useEffect is called.");
+    handleStories();
+  }, [handleStories]);
 
   const handleSearch = (event) => {
     console.log(`App.handleSearch: ${event.target.value}`);
