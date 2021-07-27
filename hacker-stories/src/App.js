@@ -6,7 +6,7 @@ import JSClass from "./components/JSClass";
 import Search from "./components/Search";
 // import { useState, useEffect } from "react";
 import useSemiPersistentState from "./components/useSemiPersistentState";
-import { useEffect, useCallback, useReducer } from "react";
+import { useEffect, useCallback, useReducer, useState } from "react";
 import { renderIntoDocument } from "react-dom/cjs/react-dom-test-utils.production.min";
 
 const welcome = {
@@ -50,10 +50,15 @@ const stories_2 = [
   },
 ];
 
-const API_ENDOPINT = "https://hn.algolia.com/api/v1/search?query=";
+const API_ENDPOINT = "https://hn.algolia.com/api/v1/search?query=";
 
 function App() {
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "");
+
+  const [url, setUrl] = useState(`${API_ENDPOINT}${searchTerm}`);
+  const handleSearchSubmit = () => {
+setUrl(`${API_ENDPOINT}${searchTerm}`)
+  }
 
   const storiesReducer = (state, action) => {
     switch (action.type) {
@@ -91,7 +96,7 @@ function App() {
     dispatchStories({ type: "STORIES_FETCH_INIT" });
 
     console.log("setIsLoading to true...");
-    fetch(`${API_ENDOPINT}${searchTerm}`)
+    fetch(url)
       .then((response) => response.json())
       .then((result) => {
         dispatchStories({
@@ -100,14 +105,14 @@ function App() {
         });
       })
       .catch(() => dispatchStories({ type: "STORIES_FETCH_FAILURE" }));
-  }, [searchTerm]);
+  }, [url]);
 
   useEffect(() => {
     console.log("useEffect is called.");
     handleStories();
   }, [handleStories]);
 
-  const handleSearch = (event) => {
+  const handleSearchInput = (event) => {
     console.log(`App.handleSearch: ${event.target.value}`);
     setSearchTerm(event.target.value);
     setTimeout(() => {
@@ -119,6 +124,8 @@ function App() {
     dispatchStories({ type: "REMOVE_STORIES", payload: item });
   };
 
+
+
   return (
     <div className="App">
       {console.log("App.rerurn()")}
@@ -128,7 +135,7 @@ function App() {
       </h2>
       <h2>{getTitle("React")}</h2>
       <h3>{getName(me)}</h3>
-      <Search search={searchTerm} onSearch={handleSearch} />
+      <Search search={searchTerm} onSearch={handleSearchInput} onSubmit={handleSearchSubmit}/>
       <br />
       <br />
       {stories.isError && <p>Something went wrong!</p>}
