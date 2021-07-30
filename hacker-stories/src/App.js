@@ -1,54 +1,13 @@
-import logo from "./logo.svg";
 import "./App.css";
-import SumAge from "./components/SumAge";
 import List from "./components/List";
 import JSClass from "./components/JSClass";
 import Search from "./components/Search";
-// import { useState, useEffect } from "react";
 import useSemiPersistentState from "./components/useSemiPersistentState";
 import { useEffect, useCallback, useReducer, useState } from "react";
-import { renderIntoDocument } from "react-dom/cjs/react-dom-test-utils.production.min";
-
-const welcome = {
-  greeting: "Hey",
-  title: "React",
-};
 
 function getTitle(title) {
   return "Title: " + title;
 }
-
-function getName(person) {
-  var name = `${person.firstName} ${person.lastName}`;
-  return name;
-}
-
-const me = {
-  firstName: "Buriburi",
-  lastName: "Zaemon",
-};
-
-// (6)
-const nameOfPerson = getName(me);
-
-const stories_2 = [
-  {
-    title: "React_2",
-    url: "https://reactjs.org/",
-    author: "Jordan Walke_2",
-    num_comments: 2,
-    points: 2,
-    objectID: 2,
-  },
-  {
-    title: "Redux_2",
-    url: "https://redux.js.org/",
-    author: "Dan Abramov, Andrew Clark_2",
-    num_comments: 2,
-    points: 2,
-    objectID: 3,
-  },
-];
 
 const API_ENDPOINT = "https://hn.algolia.com/api/v1/search?query=";
 
@@ -57,8 +16,8 @@ function App() {
 
   const [url, setUrl] = useState(`${API_ENDPOINT}${searchTerm}`);
   const handleSearchSubmit = () => {
-setUrl(`${API_ENDPOINT}${searchTerm}`)
-  }
+    setUrl(`${API_ENDPOINT}${searchTerm}`);
+  };
 
   const storiesReducer = (state, action) => {
     switch (action.type) {
@@ -124,18 +83,14 @@ setUrl(`${API_ENDPOINT}${searchTerm}`)
     dispatchStories({ type: "REMOVE_STORIES", payload: item });
   };
 
-
-
   return (
     <div className="App">
-      {console.log("App.rerurn()")}
-
-      <h2>
-        {welcome.greeting} {welcome.title}
-      </h2>
       <h2>{getTitle("React")}</h2>
-      <h3>{getName(me)}</h3>
-      <Search search={searchTerm} onSearch={handleSearchInput} onSubmit={handleSearchSubmit}/>
+      <Search
+        search={searchTerm}
+        onSearch={handleSearchInput}
+        onSubmit={handleSearchSubmit}
+      />
       <br />
       <br />
       {stories.isError && <p>Something went wrong!</p>}

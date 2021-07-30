@@ -1,7 +1,11 @@
 import React from "react";
 import InputWithLabel from "./InputWithLabel";
 
-export default function Search({ search: searchTerm, onSearch, onSubmit: handleSearchSubmit }) {
+export default function Search({
+  search: searchTerm,
+  onSearch,
+  onSubmit: handleSearchSubmit,
+}) {
   const handleChange = (event) => {
     console.log(event.target.value);
 
