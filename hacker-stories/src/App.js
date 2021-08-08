@@ -4,6 +4,7 @@ import JSClass from "./components/JSClass";
 import Search from "./components/Search";
 import useSemiPersistentState from "./components/useSemiPersistentState";
 import { useEffect, useCallback, useReducer, useState } from "react";
+import axios from "axios";
 
 function getTitle(title) {
   return "Title: " + title;
@@ -15,8 +16,9 @@ function App() {
   const [searchTerm, setSearchTerm] = useSemiPersistentState("search", "");
 
   const [url, setUrl] = useState(`${API_ENDPOINT}${searchTerm}`);
-  const handleSearchSubmit = () => {
+  const handleSearchSubmit = (event) => {
     setUrl(`${API_ENDPOINT}${searchTerm}`);
+    event.preventDefault();
   };
 
   const storiesReducer = (state, action) => {
@@ -55,12 +57,12 @@ function App() {
     dispatchStories({ type: "STORIES_FETCH_INIT" });
 
     console.log("setIsLoading to true...");
-    fetch(url)
-      .then((response) => response.json())
+    axios
+      .get(url)
       .then((result) => {
         dispatchStories({
           type: "STORIES_FETCH_SUCCESS",
-          payload: result.hits,
+          payload: result.data.hits,
         });
       })
       .catch(() => dispatchStories({ type: "STORIES_FETCH_FAILURE" }));

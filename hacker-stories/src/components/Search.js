@@ -14,18 +14,20 @@ export default function Search({
 
   return (
     <div>
-      {console.log("Search.rerurn()")}
-      <InputWithLabel
-        id="search"
-        value={searchTerm}
-        isFocused
-        onInputChange={handleChange}
-      >
-        Search:
-      </InputWithLabel>
-      <button type="button" disabled={!searchTerm} onClick={handleSearchSubmit}>
-        Submit
-      </button>
+      <form onSubmit={handleSearchSubmit}>
+        <InputWithLabel
+          id="search"
+          value={searchTerm}
+          isFocused
+          onInputChange={handleChange}
+        >
+          Search:
+        </InputWithLabel>
+        <button type="submit" disabled={!searchTerm}>
+          Submit
+        </button>
+      </form>
+
       <p>
         Searching for <strong>{searchTerm}</strong>
       </p>
