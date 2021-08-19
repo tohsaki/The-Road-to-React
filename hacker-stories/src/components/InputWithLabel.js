@@ -20,7 +20,7 @@ function InputWithLabel({
 
   return (
     <div>
-      <label htmlFor={id}>{children}</label>
+      <label htmlFor={id} className="label">{children}</label>
       &nbsp;
       <input
         ref={inputRef}
@@ -28,6 +28,7 @@ function InputWithLabel({
         type={type}
         value={value}
         onChange={onInputChange}
+        className="input"
       />
     </div>
   );

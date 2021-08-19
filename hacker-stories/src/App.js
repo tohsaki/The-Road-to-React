@@ -86,9 +86,9 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <h2>{getTitle("React")}</h2>
-      <Search
+    <div className="container">
+      <h1 className="headline-primary">My Hacker Stories</h1>
+        <Search
         search={searchTerm}
         onSearch={handleSearchInput}
         onSubmit={handleSearchSubmit}

@@ -14,7 +14,7 @@ export default function Search({
 
   return (
     <div>
-      <form onSubmit={handleSearchSubmit}>
+      <form onSubmit={handleSearchSubmit} className="search-form">
         <InputWithLabel
           id="search"
           value={searchTerm}
@@ -23,7 +23,7 @@ export default function Search({
         >
           Search:
         </InputWithLabel>
-        <button type="submit" disabled={!searchTerm}>
+        <button type="submit" disabled={!searchTerm} className="button button_large">
           Submit
         </button>
       </form>
