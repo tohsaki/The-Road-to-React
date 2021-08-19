@@ -20,7 +20,9 @@ function InputWithLabel({
 
   return (
     <div>
-      <label htmlFor={id} className="label">{children}</label>
+      <label htmlFor={id} className="label">
+        {children}
+      </label>
       &nbsp;
       <input
         ref={inputRef}

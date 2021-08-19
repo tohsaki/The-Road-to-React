@@ -23,7 +23,11 @@ export default function Search({
         >
           Search:
         </InputWithLabel>
-        <button type="submit" disabled={!searchTerm} className="button button_large">
+        <button
+          type="submit"
+          disabled={!searchTerm}
+          className="button button_large"
+        >
           Submit
         </button>
       </form>

@@ -88,7 +88,7 @@ function App() {
   return (
     <div className="container">
       <h1 className="headline-primary">My Hacker Stories</h1>
-        <Search
+      <Search
         search={searchTerm}
         onSearch={handleSearchInput}
         onSubmit={handleSearchSubmit}
