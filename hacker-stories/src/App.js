@@ -1,4 +1,4 @@
-import "./App.css";
+import style from "./App.module.css";
 import List from "./components/List";
 import JSClass from "./components/JSClass";
 import Search from "./components/Search";
@@ -86,8 +86,8 @@ function App() {
   };
 
   return (
-    <div className="container">
-      <h1 className="headline-primary">My Hacker Stories</h1>
+    <div className={style.container}>
+      <h1 className={style.headlinePrimary}>My Hacker Stories</h1>
       <Search
         search={searchTerm}
         onSearch={handleSearchInput}

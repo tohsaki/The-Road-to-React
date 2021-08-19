@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from "react";
+import style from "../App.module.css";
 
 function InputWithLabel({
   id,
@@ -20,7 +21,7 @@ function InputWithLabel({
 
   return (
     <div>
-      <label htmlFor={id} className="label">
+      <label htmlFor={id} className={style.label}>
         {children}
       </label>
       &nbsp;
@@ -30,7 +31,7 @@ function InputWithLabel({
         type={type}
         value={value}
         onChange={onInputChange}
-        className="input"
+        className={style.input}
       />
     </div>
   );
