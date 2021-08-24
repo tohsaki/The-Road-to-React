@@ -32,6 +32,8 @@ border: 1px solid #171212; padding: 5px;
   &:hover {
     background: #171212;
     color: #ffffff;
+    fill: #ffffff;
+stroke: #ffffff;
 } `;
 
 const StyledButtonSmall = styled(StyledButton)` padding: 5px;
