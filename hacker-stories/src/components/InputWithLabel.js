@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import {StyledLabel, StyledInput} from "./StyledComponents"
+import { StyledLabel, StyledInput } from "./StyledComponents";
 
 function InputWithLabel({
   id,
@@ -21,9 +21,7 @@ function InputWithLabel({
 
   return (
     <div>
-      <StyledLabel htmlFor={id} >
-        {children}
-      </StyledLabel>
+      <StyledLabel htmlFor={id}>{children}</StyledLabel>
       &nbsp;
       <StyledInput
         ref={inputRef}

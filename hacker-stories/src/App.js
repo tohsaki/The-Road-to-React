@@ -4,12 +4,14 @@ import Search from "./components/Search";
 import useSemiPersistentState from "./components/useSemiPersistentState";
 import { useEffect, useCallback, useReducer, useState } from "react";
 import axios from "axios";
-import {StyledContainer, StyledHeadlinePrimary} from "./components/StyledComponents"
+import {
+  StyledContainer,
+  StyledHeadlinePrimary,
+} from "./components/StyledComponents";
 
 function getTitle(title) {
   return "Title: " + title;
 }
-
 
 const API_ENDPOINT = "https://hn.algolia.com/api/v1/search?query=";
 

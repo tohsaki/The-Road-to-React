@@ -1,6 +1,6 @@
 import React from "react";
 import InputWithLabel from "./InputWithLabel";
-import {StyledButtonLarge, StyledSearchForm} from "./StyledComponents"
+import { StyledButtonLarge, StyledSearchForm } from "./StyledComponents";
 
 export default function Search({
   search: searchTerm,
@@ -24,10 +24,7 @@ export default function Search({
         >
           Search:
         </InputWithLabel>
-        <StyledButtonLarge
-          type="submit"
-          disabled={!searchTerm}
-        >
+        <StyledButtonLarge type="submit" disabled={!searchTerm}>
           Submit
         </StyledButtonLarge>
       </StyledSearchForm>
