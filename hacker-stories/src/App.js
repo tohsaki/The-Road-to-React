@@ -1,14 +1,15 @@
-import style from "./App.module.css";
 import List from "./components/List";
 import JSClass from "./components/JSClass";
 import Search from "./components/Search";
 import useSemiPersistentState from "./components/useSemiPersistentState";
 import { useEffect, useCallback, useReducer, useState } from "react";
 import axios from "axios";
+import {StyledContainer, StyledHeadlinePrimary} from "./components/StyledComponents"
 
 function getTitle(title) {
   return "Title: " + title;
 }
+
 
 const API_ENDPOINT = "https://hn.algolia.com/api/v1/search?query=";
 
@@ -86,8 +87,8 @@ function App() {
   };
 
   return (
-    <div className={style.container}>
-      <h1 className={style.headlinePrimary}>My Hacker Stories</h1>
+    <StyledContainer>
+      <StyledHeadlinePrimary>My Hacker Stories</StyledHeadlinePrimary>
       <Search
         search={searchTerm}
         onSearch={handleSearchInput}
@@ -105,7 +106,7 @@ function App() {
       </ul>
 
       <JSClass />
-    </div>
+    </StyledContainer>
   );
 }
 

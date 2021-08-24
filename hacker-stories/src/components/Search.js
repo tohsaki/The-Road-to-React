@@ -1,6 +1,6 @@
 import React from "react";
 import InputWithLabel from "./InputWithLabel";
-import style from "../App.module.css";
+import {StyledButtonLarge, StyledSearchForm} from "./StyledComponents"
 
 export default function Search({
   search: searchTerm,
@@ -15,7 +15,7 @@ export default function Search({
 
   return (
     <div>
-      <form onSubmit={handleSearchSubmit} className={style.searchForm}>
+      <StyledSearchForm onSubmit={handleSearchSubmit}>
         <InputWithLabel
           id="search"
           value={searchTerm}
@@ -24,14 +24,13 @@ export default function Search({
         >
           Search:
         </InputWithLabel>
-        <button
+        <StyledButtonLarge
           type="submit"
           disabled={!searchTerm}
-          className={`${style.button} ${style.buttonLarge}`}
         >
           Submit
-        </button>
-      </form>
+        </StyledButtonLarge>
+      </StyledSearchForm>
 
       <p>
         Searching for <strong>{searchTerm}</strong>

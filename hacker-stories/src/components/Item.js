@@ -1,25 +1,24 @@
 import React from "react";
-import style from "../App.module.css";
+import {StyledItem, StyledColumn, StyledButtonSmall} from "./StyledComponents"
 
 function Item({ item, onRemoveItem }) {
   return (
-    <li className={style.item}>
-      <span style={{ width: "40%" }}>
+    <StyledItem>
+      <StyledColumn style={{ width: "40%" }}>
         <a href={item.url}>{item.title}</a>
-      </span>
-      <span style={{ width: "30%" }}> {item.author}</span>
-      <span style={{ width: "10%" }}> {item.num_comments} comment(s)</span>
-      <span style={{ width: "10%" }}> {item.points} point(s)</span>
-      <span style={{ width: "10%" }}>
-        <button
+      </StyledColumn>
+      <StyledColumn style={{ width: "30%" }}> {item.author}</StyledColumn>
+      <StyledColumn style={{ width: "10%" }}> {item.num_comments} comment(s)</StyledColumn>
+      <StyledColumn style={{ width: "10%" }}> {item.points} point(s)</StyledColumn>
+      <StyledColumn style={{ width: "10%" }}>
+        <StyledButtonSmall
           type="button"
           onClick={() => onRemoveItem(item)}
-          className={`${style.button} ${style.buttonSmall}`}
         >
           Dismiss
-        </button>
-      </span>
-    </li>
+        </StyledButtonSmall>
+      </StyledColumn>
+    </StyledItem>
   );
 }
 
